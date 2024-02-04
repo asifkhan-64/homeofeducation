@@ -6,21 +6,21 @@
     }
     include('../_partials/header.php');
 
-    $countedInst = mysqli_query($connect, "SELECT COUNT(*) AS countedIns FROM `institutes`");
-    $fetch_countedAllIns = mysqli_fetch_assoc($countedInst);
-    $Ins = $fetch_countedAllIns['countedIns'];
+    // $countedInst = mysqli_query($connect, "SELECT COUNT(*) AS countedIns FROM `institutes`");
+    // $fetch_countedAllIns = mysqli_fetch_assoc($countedInst);
+    // $Ins = $fetch_countedAllIns['countedIns'];
 
-    $countedWards = mysqli_query($connect, "SELECT COUNT(*) AS countedWards FROM `wards`");
-    $fetch_countedAllWards = mysqli_fetch_assoc($countedWards);
-    $Wards = $fetch_countedAllWards['countedWards'];
+    // $countedWards = mysqli_query($connect, "SELECT COUNT(*) AS countedWards FROM `wards`");
+    // $fetch_countedAllWards = mysqli_fetch_assoc($countedWards);
+    // $Wards = $fetch_countedAllWards['countedWards'];
 
-    $countedTechnologies = mysqli_query($connect, "SELECT COUNT(*) AS countedTechnologies FROM `technology`");
-    $fetch_countedTechnologies = mysqli_fetch_assoc($countedTechnologies);
-    $Tech = $fetch_countedTechnologies['countedTechnologies'];
+    // $countedTechnologies = mysqli_query($connect, "SELECT COUNT(*) AS countedTechnologies FROM `technology`");
+    // $fetch_countedTechnologies = mysqli_fetch_assoc($countedTechnologies);
+    // $Tech = $fetch_countedTechnologies['countedTechnologies'];
     
-    $countedStudents = mysqli_query($connect, "SELECT COUNT(*) AS countedStudents FROM `students`");
-    $fetch_countedStudents = mysqli_fetch_assoc($countedStudents);
-    $Std = $fetch_countedStudents['countedStudents'];
+    // $countedStudents = mysqli_query($connect, "SELECT COUNT(*) AS countedStudents FROM `students`");
+    // $fetch_countedStudents = mysqli_fetch_assoc($countedStudents);
+    // $Std = $fetch_countedStudents['countedStudents'];
 
 
     // $approvedProducts = mysqli_query($connect, "SELECT COUNT(*) AS approvedProducts FROM `stock_add` WHERE mobile_status = '1' AND mobile_imei = '1'");

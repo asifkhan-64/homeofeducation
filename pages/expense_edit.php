@@ -9,16 +9,23 @@
     $added = '';
     $error= '';
 
+    $id = $_GET['id'];
+    $getQuery = mysqli_query($connect, "SELECT * FROM expenses WHERE expense_id = '$id'");
+    $fetch_getQuery = mysqli_fetch_assoc($getQuery);
+
+
     if (isset($_POST['addExpense'])) {
         $expense_amount = $_POST['expense_amount'];
         $expense_date = $_POST['expense_date'];
         $expense_desc = $_POST['expense_desc'];
 
-        $insertQuery = mysqli_query($connect, "INSERT INTO expenses(expense_amount, expense_date, expense_desc)VALUES('$expense_amount', '$expense_date', '$expense_desc')");
-        if (!$insertQuery) {
+        $id = $_POST['id'];
+
+        $updateQuery = mysqli_query($connect, "UPDATE expenses SET expense_amount = '$expense_amount', expense_date = '$expense_date', expense_desc = '$expense_desc' WHERE expense_id = '$id'");
+        if (!$updateQuery) {
             $error = 
             '<div class="alert alert-dark" role="alert">
-                Expense Not Added! Try again!
+                Expense Not Updated! Try again!
             </div>';
         }else {
             // $added = '
@@ -50,21 +57,23 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Amount</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e: 250" type="number" value="" id="example-text-input" name="expense_amount" required="">
+                                    <input class="form-control" placeholder="i.e: 250" type="number" value="<?php echo $fetch_getQuery['expense_amount'] ?>" id="example-text-input" name="expense_amount" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Date</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Date" type="date" value="" id="example-text-input" name="expense_date" required="">
+                                    <input class="form-control" placeholder="Date" type="date" value="<?php echo $fetch_getQuery['expense_date'] ?>" id="example-text-input" name="expense_date" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" placeholder="Description" type="text" value="" id="example-text-input" name="expense_desc" required="">
+                                    <input class="form-control" placeholder="Description" type="text" value="<?php echo $fetch_getQuery['expense_desc'] ?>" id="example-text-input" name="expense_desc" required="">
                                 </div>
                             </div>
+
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
                             
                             <hr>
                             <div class="form-group row">
