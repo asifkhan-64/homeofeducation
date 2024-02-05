@@ -20,6 +20,8 @@
 
 
     include('../_partials/header.php');
+
+    if ($userRole === '3') {}else {echo "<script>window.location.href = 'accessDenied.php'</script>";}
 ?>
 
 <div class="page-content-wrapper ">

@@ -32,6 +32,8 @@
     }
 
     include('../_partials/header.php');
+
+    if ($userRole === '1') {}else {echo "<script>window.location.href = 'accessDenied.php'</script>";}
 ?>
                 <!-- Top Bar End -->
 

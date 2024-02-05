@@ -8,10 +8,9 @@
     $dateFrom = $_GET['dateFrom'];
     $dateTo = $_GET['dateTo'];
 
-
-
-
     include('../_partials/header.php');
+
+    if ($userRole === '3') {}else {echo "<script>window.location.href = 'accessDenied.php'</script>";}
 ?>
 <style type="text/css">
     body, td {
@@ -82,7 +81,7 @@
 
                         <tbody>
                             <?php 
-                            $query = mysqli_query($connect, "SELECT * FROM expenses WHERE expense_date BETWEEN '$dateFrom' AND '$dateTo'");                            
+                            $query = mysqli_query($connect, "SELECT * FROM expenses WHERE expense_date BETWEEN '$dateFrom' AND '$dateTo'");
                             $iteration = 1;
 
                             $totalAmount = 0;

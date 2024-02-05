@@ -103,6 +103,14 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
+
+                        <?php
+                            $checkQuery = mysqli_query($connect, "SELECT user_role FROM login_user WHERE email = '$sesssionEmail'");
+                            $fetch_checkQuery = mysqli_fetch_assoc($checkQuery);
+                            $userRole = $fetch_checkQuery['user_role'];
+
+                            if ($userRole === '1') {
+                        ?>
                         
                         <!-- Super Admin Module Starts -->
 
@@ -130,6 +138,10 @@
 
                         <!-- Super Admin Module End -->
 
+                        <?php   
+                            } else if ($userRole === '3') {
+                        ?>
+
                         <!-- Expense Module Starts -->
 
                         <li class="has_sub">
@@ -149,7 +161,18 @@
 
                         <!-- Expense Module End -->
 
+                        <?php   
+                            } else if ($userRole === '2') {
+                        ?>
+
                         <!-- Users Module Starts -->
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-flag"></i> <span> Countries</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="countries_list.php">Countries List</a></li>
+                            </ul>
+                        </li>
 
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-chalkboard-teacher"></i> <span> Clients</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -160,6 +183,11 @@
                         </li>
 
                         <!-- Users Module End -->
+
+                        <?php   
+                            }
+                        ?>
+
 
                         <!-- General Module For Everyone Starts -->
                         <li class="has_sub">
