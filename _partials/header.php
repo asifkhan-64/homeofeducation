@@ -105,9 +105,11 @@
                         </li>
 
                         <?php
-                            $checkQuery = mysqli_query($connect, "SELECT user_role FROM login_user WHERE email = '$sesssionEmail'");
-                            $fetch_checkQuery = mysqli_fetch_assoc($checkQuery);
+                            $checkQuery = mysqli_query($connect, "SELECT * FROM login_user WHERE email = '$sesssionEmail'");
+                            $fetch_checkQuery = mysqli_fetch_assoc($checkQuery); 
                             $userRole = $fetch_checkQuery['user_role'];
+                            $signedUser = $fetch_checkQuery['email'];
+                            $signedUserId = $fetch_checkQuery['id'];
 
                             if ($userRole === '1') {
                         ?>
