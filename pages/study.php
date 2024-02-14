@@ -11,7 +11,6 @@
 
 
     if (isset($_POST['addClient'])) {
-
         $u_id                   = $_POST['u_id'];
         $client_name            = $_POST['client_name'];
         $client_guardian        = $_POST['client_guardian'];
@@ -20,17 +19,17 @@
         $client_passportno      = $_POST['client_passportno'];
         $client_passportexpiry  = $_POST['client_passportexpiry'];
         $client_country         = $_POST['client_country'];
-        $client_permitduration  = $_POST['client_permitduration'];
         $client_amountfig       = $_POST['client_amountfig'];
         $client_amountwords     = $_POST['client_amountwords'];
         $client_advance         = $_POST['client_advance'];
-        $client_remaining       = $_POST['client_remaining'];
+        $client_refund          = $_POST['client_refund'];
         $client_processtime     = $_POST['client_processtime'];
-        $client_workstatus      = $_POST['client_workstatus'];
+        $client_bankstatement   = $_POST['client_bankstatement'];
+        $client_amountafter     = $_POST['client_amountafter'];
         $client_cnic            = $_POST['client_cnic'];
 
 
-        $insertQuery = mysqli_query($connect, "INSERT INTO `work_client`(
+        $insertQuery = mysqli_query($connect, "INSERT INTO `study_client`(
             `client_name`,
              `client_guardian`,
               `client_address`,
@@ -38,15 +37,15 @@
                 `client_passportno`,
                  `client_passportexpiry`,
                   `client_country`,
-                   `client_permitduration`,
+                   `client_cnic`,
                     `client_amountfig`,
                      `client_amountwords`,
                       `client_advance`,
-                       `client_remaining`,
+                       `client_refund`,
                         `client_processtime`,
-                         `client_workstatus`,
-                          `u_id`,
-                           `client_cnic`
+                         `client_bankstatement`,
+                          `client_amountafter`,
+                           `u_id`
             ) VALUES (
                 '$client_name',
                  '$client_guardian',
@@ -55,15 +54,15 @@
                     '$client_passportno',
                      '$client_passportexpiry',
                       '$client_country',
-                       '$client_permitduration',
+                       '$client_cnic',
                         '$client_amountfig',
                          '$client_amountwords',
                           '$client_advance',
-                           '$client_remaining',
+                           '$client_refund',
                             '$client_processtime',
-                             '$client_workstatus',
-                              '$u_id',
-                               '$client_cnic'
+                             '$client_bankstatement',
+                              '$client_amountafter',
+                               '$u_id'
             )");
         if (!$insertQuery) {
             $error = 
@@ -71,7 +70,7 @@
                 Client Not Added! Try again!
             </div>';
         }else {
-            header("LOCATION: client_list.php");
+            header("LOCATION: client_student_list.php");
         }
     }
 
@@ -82,11 +81,15 @@
 
 ?>
 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script> -->
+
+
 <div class="page-content-wrapper ">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Client (Work Permit Agreement)</h5>
+                <h5 class="page-title">Client (Study Agreement)</h5>
             </div>
         </div>
         <!-- end row -->
@@ -143,7 +146,7 @@
                             <hr />
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Work Country</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Study Country</label>
                                 <div class="col-sm-4">
                                         <?php
                                             $getCountries = mysqli_query($connect, "SELECT * FROM `countries`");
@@ -157,9 +160,9 @@
                                         ?>
                                 </div>
 
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Permit Duration</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Processing Time</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e 3 Years" type="text" value="" id="example-text-input" name="client_permitduration" required="">
+                                    <input class="form-control" placeholder="i.e 3 Months" type="text" value="" id="example-text-input" name="client_processtime" required="">
                                 </div>
                             </div>
 
@@ -176,31 +179,29 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Advance Payment</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Advance Tuition Fee</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" placeholder="i.e Pound 15000" type="text" value="" id="example-text-input" name="client_advance" required="">
                                 </div>
 
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Remaining Payment</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Refund Days (Refusal)</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="" id="example-text-input" name="client_remaining" required="">
+                                    <input class="form-control" placeholder="i.e 20 Days in PKR" type="text" value="" id="example-text-input" name="client_refund" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Processing Time</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Bank Statement</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e 3 Months" type="text" value="" id="example-text-input" name="client_processtime" required="">
+                                    <input class="form-control" placeholder="Bank Statement" type="text" value="" id="example-text-input" name="client_bankstatement" required="">
                                 </div>
 
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Work Status</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Amount After Visa</label>
                                 <div class="col-sm-4">
-                                    <select required name="client_workstatus" class="form-control status" id="selectField">
-                                        <option value="0">Without Work</option>
-                                        <option value="1">With Work</option>
-                                    </select>
+                                    <input class="form-control" placeholder="i.e 1000 Pounds" type="text" value="" id="example-text-input" name="client_amountafter" required="">
                                 </div>
                             </div>
+
                             <hr />
 
                             <div class="form-group row">
@@ -258,78 +259,11 @@ $('.status').select2({
 });
 </script>
 
-<script>
-    // Get the input element and the display element
-    const textInput = document.getElementById('textInput');
-    const textDisplay = document.getElementById('textDisplay');
-    const textDisplaySecond = document.getElementById('textDisplaySecond');
-    const textDisplayThird = document.getElementById('textDisplayThird');
-    const textDisplayFourth = document.getElementById('textDisplayFourth');
-
-    // Add keyup event listener to the input element
-    textInput.addEventListener('keyup', function() {
-      // Get the text value from the input
-      const text = textInput.value;
-      // Update the text content of the display element
-      textDisplay.textContent = text;
-      textDisplaySecond.textContent = text;
-      textDisplayThird.textContent = text;
-      textDisplayFourth.textContent = text;
-    });
-  </script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
-        // Get the input element and the display element
-        const textInputFigs = document.getElementById('textInputFigs');
-        const textDisplayFigs = document.getElementById('textDisplayFigs'); 
-
-        // Add keyup event listener to the input element
-        textInputFigs.addEventListener('keyup', function() {
-        // Get the text value from the input
-        const textAnother = textInputFigs.value;
-        // Update the text content of the display element
-        textDisplayFigs.textContent = textAnother;
-        });
-    </script>
-
-
-    <script>
-        // Get the input element and the display element
-        const textInputWords = document.getElementById('textInputWords');
-        const textDisplayWords = document.getElementById('textDisplayWords'); 
-
-        // Add keyup event listener to the input element
-        textInputWords.addEventListener('keyup', function() {
-        // Get the text value from the input
-        const textAnotherOther = textInputWords.value;
-        // Update the text content of the display element
-        textDisplayWords.textContent = textAnotherOther;
-        });
-    </script>
-
-  <script>
-    // Get the select element and the paragraph element
-    const selectField = document.getElementById('selectField');
-    const selectedOptionText = document.getElementById('selectedOptionText');
-
-    // Add change event listener to the select element
-    selectField.addEventListener('change', function() {
-      // Get the selected option element
-      const selectedOption = selectField.options[selectField.selectedIndex];
-      // Get the text content of the selected option
-      const selectedText = selectedOption.textContent;
-      // Update the text content of the paragraph element
-      selectedOptionText.textContent = selectedText;
-      selectedOptionTextSecond.textContent = selectedText;
-    });
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
-        <script>
-            $(":input").inputmask();
-    </script>
+        $(":input").inputmask();
+   </script>
 </body>
 
 </html>

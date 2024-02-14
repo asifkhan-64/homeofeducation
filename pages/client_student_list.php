@@ -26,15 +26,16 @@
             <div class="col-sm-3"></div>
 
             <div class="col-sm-2 my-4">
-                <a href="client_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-secondary btn-lg">Work <i class="fa fa-eye"></i></a>
+                <a href="client_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-secondary btn-lg">Work</a>
             </div>
 
             <div class="col-sm-2 my-4">
-                <a href="client_student_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-success btn-lg">Study</a>
+                <a href="client_student_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-success btn-lg">Study <i class="fa fa-eye"></i></a>
             </div>
 
             <div class="col-sm-2 my-4">
                 <a href="client_visit_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-dark btn-lg">Visitors</a>
+                <!-- <a href="client_visit_list.php" disabled style="width: 100% !important; padding: 15%;" class="customBtn btn btn-dark btn-lg">Visitors</a> -->
             </div>
 
             <div class="col-sm-3"></div>
@@ -44,7 +45,7 @@
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Clients List (Work Permit)</h4>
+                        <h4 class="mt-0 header-title">Clients List (Study/Student)</h4>
                        
                         <table id="datatable" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
@@ -62,9 +63,9 @@
                             <tbody>
                                 <?php
 
-                                $retClients = mysqli_query($connect, "SELECT work_client.*, countries.country_name FROM `work_client`
-                                INNER JOIN countries ON countries.c_id = work_client.client_country
-                                WHERE work_client.u_id = '$signedUserId'");
+                                $retClients = mysqli_query($connect, "SELECT study_client.*, countries.country_name FROM `study_client`
+                                INNER JOIN countries ON countries.c_id = study_client.client_country
+                                WHERE study_client.u_id = '$signedUserId'");
                                 $iteration = 1;
 
                                 while ($rowClients = mysqli_fetch_assoc($retClients)) {
@@ -76,8 +77,8 @@
                                         <td>'.$rowClients['client_address'].'</td>
                                         <td>'.$rowClients['client_contact'].'</td>
                                         <td>'.$rowClients['country_name'].'</td>
-                                        <td class="text-center"><a href="client_work_edit.php?id='.$rowClients['w_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
-                                        <td class="text-center"><a href="client_work_agreement.php?id='.$rowClients['w_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
+                                        <td class="text-center"><a href="client_study_edit.php?id='.$rowClients['s_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
+                                        <td class="text-center"><a href="client_work_agreement.php?id='.$rowClients['s_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
                                     </tr>
                                     ';
                                 }

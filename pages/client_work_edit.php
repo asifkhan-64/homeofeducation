@@ -9,8 +9,12 @@
     $added = '';
     $alreadyAdded = '';
 
+    $id = $_GET['id'];
+    $getQuery = mysqli_query($connect, "SELECT * FROM work_client WHERE w_id = '$id'");
+    $fetch_getQuery = mysqli_fetch_assoc($getQuery);
 
-    if (isset($_POST['addClient'])) {
+
+    if (isset($_POST['updateClient'])) {
 
         $u_id                   = $_POST['u_id'];
         $client_name            = $_POST['client_name'];
@@ -28,44 +32,28 @@
         $client_processtime     = $_POST['client_processtime'];
         $client_workstatus      = $_POST['client_workstatus'];
         $client_cnic            = $_POST['client_cnic'];
+        $id                     = $_POST['id'];
 
 
-        $insertQuery = mysqli_query($connect, "INSERT INTO `work_client`(
-            `client_name`,
-             `client_guardian`,
-              `client_address`,
-               `client_contact`,
-                `client_passportno`,
-                 `client_passportexpiry`,
-                  `client_country`,
-                   `client_permitduration`,
-                    `client_amountfig`,
-                     `client_amountwords`,
-                      `client_advance`,
-                       `client_remaining`,
-                        `client_processtime`,
-                         `client_workstatus`,
-                          `u_id`,
-                           `client_cnic`
-            ) VALUES (
-                '$client_name',
-                 '$client_guardian',
-                  '$client_address',
-                   '$client_contact',
-                    '$client_passportno',
-                     '$client_passportexpiry',
-                      '$client_country',
-                       '$client_permitduration',
-                        '$client_amountfig',
-                         '$client_amountwords',
-                          '$client_advance',
-                           '$client_remaining',
-                            '$client_processtime',
-                             '$client_workstatus',
-                              '$u_id',
-                               '$client_cnic'
-            )");
-        if (!$insertQuery) {
+        $updateQuery = mysqli_query($connect, "UPDATE `work_client` SET
+            `client_name` = '$client_name',
+             `client_guardian` = '$client_guardian',
+              `client_address` = '$client_address',
+               `client_contact` = '$client_contact',
+                `client_passportno` = '$client_passportno',
+                 `client_passportexpiry` = '$client_passportexpiry',
+                  `client_country` = '$client_country',
+                   `client_permitduration` = '$client_permitduration',
+                    `client_amountfig` = '$client_amountfig',
+                     `client_amountwords` = '$client_amountwords',
+                      `client_advance` = '$client_advance',
+                       `client_remaining` = '$client_remaining',
+                        `client_processtime` = '$client_processtime',
+                         `client_workstatus` = '$client_workstatus',
+                          `client_cnic` = '$client_cnic'
+                            WHERE w_id = '$id'");
+                            
+        if (!$updateQuery) {
             $error = 
             '<div class="alert alert-dark" role="alert">
                 Client Not Added! Try again!
@@ -86,7 +74,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Client (Work Permit Agreement)</h5>
+                <h5 class="page-title">Edit Client (Work Permit Agreement)</h5>
             </div>
         </div>
         <!-- end row -->
@@ -96,47 +84,48 @@
                     <div class="card-body">
                         <form method="POST">                            
                             <input type="hidden" name="u_id" value="<?php echo $signedUserId ?>">
+                            <input type="hidden" name="id" value="<?php echo $id ?>">
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Client Name</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Client Name" type="text" value="" id="example-text-input" name="client_name" required="">
+                                    <input class="form-control" placeholder="Client Name" type="text" value="<?php echo $fetch_getQuery['client_name'] ?>" id="example-text-input" name="client_name" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Guardian Name</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Guardian Name" type="text" value="" id="example-text-input" name="client_guardian" required="">
+                                    <input class="form-control" placeholder="Guardian Name" type="text" value="<?php echo $fetch_getQuery['client_guardian'] ?>" id="example-text-input" name="client_guardian" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Residence Of</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Address" type="text" value="" id="example-text-input" name="client_address" required="">
+                                    <input class="form-control" placeholder="Address" type="text" value="<?php echo $fetch_getQuery['client_address'] ?>" id="example-text-input" name="client_address" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Contact</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" maxlength = "12" data-inputmask="'mask': '0399-99999999'" placeholder="03xx-xxxxxxx" type="text" value="" id="example-text-input" name="client_contact" required="">
+                                    <input class="form-control" maxlength = "12" data-inputmask="'mask': '0399-99999999'" placeholder="03xx-xxxxxxx" type="text" value="0<?php echo $fetch_getQuery['client_contact'] ?>" id="example-text-input" name="client_contact" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Passport No.</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Passport Number" type="text" value="" id="example-text-input" name="client_passportno" required="">
+                                    <input class="form-control" placeholder="Passport Number" type="text" value="<?php echo $fetch_getQuery['client_passportno'] ?>" id="example-text-input" name="client_passportno" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Passport Expiry</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="Expiry Date" type="date" value="" id="example-text-input" name="client_passportexpiry" required="">
+                                    <input class="form-control" placeholder="Expiry Date" type="date" value="<?php echo $fetch_getQuery['client_passportexpiry'] ?>" id="example-text-input" name="client_passportexpiry" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">CNIC No</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control cnic" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="" id="example-text-input" name="client_cnic" required="">
+                                    <input class="form-control cnic" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="<?php echo $fetch_getQuery['client_cnic'] ?>" id="example-text-input" name="client_cnic" required="">
                                 </div>
                             </div>
 
@@ -150,7 +139,11 @@
                                             $optCountries = '<select required name="client_country" class="form-control comp">';
                                                 
                                                 while ($rowCountries = mysqli_fetch_assoc($getCountries)) {
-                                                    $optCountries.= '<option value='.$rowCountries['c_id'].'>'.$rowCountries['country_name'].'</option>';
+                                                    if ($fetch_getQuery['client_country'] === $rowCountries['c_id']) {
+                                                        $optCountries.= '<option value='.$rowCountries['c_id'].' selected>'.$rowCountries['country_name'].'</option>';
+                                                    }else {
+                                                        $optCountries.= '<option value='.$rowCountries['c_id'].'>'.$rowCountries['country_name'].'</option>';
+                                                    }
                                                 }
                                                 $optCountries.= "</select>";
                                             echo $optCountries;
@@ -159,55 +152,66 @@
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Permit Duration</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e 3 Years" type="text" value="" id="example-text-input" name="client_permitduration" required="">
+                                    <input class="form-control" placeholder="i.e 3 Years" type="text" value="<?php echo $fetch_getQuery['client_permitduration'] ?>" id="example-text-input" name="client_permitduration" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Amount in Fig</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e Pound 15000" type="text" value="" id="example-text-input" name="client_amountfig" required="">
+                                    <input class="form-control" placeholder="i.e Pound 15000" type="text" value="<?php echo $fetch_getQuery['client_amountfig'] ?>" id="example-text-input" name="client_amountfig" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Amount in Words</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="" id="example-text-input" name="client_amountwords" required="">
+                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="<?php echo $fetch_getQuery['client_amountwords'] ?>" id="example-text-input" name="client_amountwords" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Advance Payment</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e Pound 15000" type="text" value="" id="example-text-input" name="client_advance" required="">
+                                    <input class="form-control" placeholder="i.e Pound 15000" type="text" value="<?php echo $fetch_getQuery['client_advance'] ?>" id="example-text-input" name="client_advance" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Remaining Payment</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="" id="example-text-input" name="client_remaining" required="">
+                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="<?php echo $fetch_getQuery['client_remaining'] ?>" id="example-text-input" name="client_remaining" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Processing Time</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e 3 Months" type="text" value="" id="example-text-input" name="client_processtime" required="">
+                                    <input class="form-control" placeholder="i.e 3 Months" type="text" value="<?php echo $fetch_getQuery['client_processtime'] ?>" id="example-text-input" name="client_processtime" required="">
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Work Status</label>
                                 <div class="col-sm-4">
                                     <select required name="client_workstatus" class="form-control status" id="selectField">
-                                        <option value="0">Without Work</option>
-                                        <option value="1">With Work</option>
+                                        <?php
+                                        if ($fetch_getQuery['client_workstatus'] === '0') {
+                                            echo '
+                                            <option value="0" selected>Without Work</option>
+                                            <option value="1">With Work</option>
+                                            ';
+                                        }else {
+                                            echo '
+                                            <option value="0">Without Work</option>
+                                            <option value="1" selected>With Work</option>
+                                            ';
+                                        }
+                                        ?>
+                                        
                                     </select>
                                 </div>
                             </div>
                             <hr />
-
                             <div class="form-group row">
                                 <!-- <label for="example-password-input" class="col-sm-2 col-form-label"></label> -->
                                 <div class="col-sm-12" align="right">
                                     <?php include('../_partials/cancel.php') ?>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="addClient">Add Client</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="updateClient">Update Client</button>
                                 </div>
                             </div>
                         </form>
@@ -217,6 +221,7 @@
                     </div>
                 </div>
             </div>
+            
         </div> <!-- end row -->
     </div><!-- container fluid -->
 </div> <!-- Page content Wrapper -->
@@ -325,11 +330,12 @@ $('.status').select2({
     });
   </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
         <script>
             $(":input").inputmask();
     </script>
+</body>
 </body>
 
 </html>

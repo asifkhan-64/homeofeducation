@@ -26,8 +26,8 @@
                         <h3 id="blink_text" align="center">New Client!</h3>
                         <hr />
                         <a href="work.php" class="btn btn-dark btn-lg py-4 px-5 m-3" style="font-size: 20px;">Work</a>
-                        <button class="btn btn-dark btn-lg py-4 px-5 m-3" style="font-size: 20px;">Study</button>
-                        <button class="btn btn-dark btn-lg py-4 px-5 m-3" style="font-size: 20px;">Visitor</button>
+                        <a href="study.php" class="btn btn-dark btn-lg py-4 px-5 m-3" style="font-size: 20px;">Study</a>
+                        <a href="#" class="btn btn-dark btn-lg py-4 px-5 m-3" style="font-size: 20px;">Visitor</a>
                     </div>
                 </div>
             </div>
