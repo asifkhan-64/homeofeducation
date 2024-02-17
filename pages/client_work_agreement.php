@@ -28,7 +28,7 @@
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
 
-    p, li {
+    p, #customIdForLi {
         font-size: 11px;;
     }
     
@@ -54,11 +54,11 @@
                                 <div class="col-12" style="margin-top: 22%;">
                                     <div class="invoice-title">
                                         <h6 style="font-size: 90%;" class="m-t-0 text-center">
-                                            Agreement
+                                            Agreement (PAK <img src="../assets/flight.png" width="3%"> <?php echo $WorkClientsFetch['country_name'] ?>)
                                         </h6>
                                     </div>
 
-                                    <p>
+                                    <p style="margin: 0% !important">
                                         <b>
                                             This agreement done between HOME OF EDUCATION CONSULTANTS PVT.LTD and Mr. <?php echo $WorkClientsFetch['client_name'] ?> S/O <?php echo $WorkClientsFetch['client_guardian'] ?> Resident of <?php echo $WorkClientsFetch['client_address'] ?> (<?php echo $WorkClientsFetch['client_contact'] ?>).
                                         </b>
@@ -68,32 +68,54 @@
                                         <b>Following are the points of agreement for <q><?php echo $WorkClientsFetch['country_name'] ?></q> Work Permit and Application Process.</b>
                                     </p>
 
-                                    <p>
+                                    <p style="margin: 0% !important">
                                         This Application will cost <b>Mr. <?php echo $WorkClientsFetch['client_name'] ?></b> Passport Number: <?php echo $WorkClientsFetch['client_passportno'] ?> Expiry Date: <?php echo $WorkClientsFetch['client_passportexpiry'] ?> an Amount of <?php echo $WorkClientsFetch['client_amountfig'] ?> (<?php echo $WorkClientsFetch['client_amountwords'] ?>).
                                     
-                                        <ul>
-                                            <li style="margin-top: -2% !important">
+                                        <ul >
+                                            <li id="customIdForLi">
                                                 The Client agrees to facilitate the process of obtaining a work permit for <b><?php echo $WorkClientsFetch['client_name'] ?></b> in <b><?php echo $WorkClientsFetch['country_name'] ?></b>. 
                                             </li>
                                             
-                                            <li>
+                                            <li id="customIdForLi">
                                                 The work permit allows <b><?php echo $WorkClientsFetch['client_name'] ?></b> to legally work in <b><?php echo $WorkClientsFetch['country_name'] ?></b> for a period of <?php echo $WorkClientsFetch['client_permitduration'] ?>. 
                                             </li>
                                         </ul>
                                     </p>
 
-                                    <p style="margin: 0% !important">
+                                    <p style="margin-top: -1% !important;">
                                         <b>Financial Considerations:</b>
                                     
-                                        <ul>
-                                            <li>The total cost of the work permit is agreed upon as <?php echo $WorkClientsFetch['client_amountfig'] ?> (<?php echo $WorkClientsFetch['client_amountwords'] ?>).</li>
-                                            <li><b><?php echo $WorkClientsFetch['client_name'] ?></b> agrees to pay an initial amount of <?php echo $WorkClientsFetch['client_advance'] ?> as an advance payment before the work permit application process begins.</li>
-                                            <li>After the successful acquisition of the work permit, <b><?php echo $WorkClientsFetch['client_name'] ?></b> will pay the remaining amount of <?php echo $WorkClientsFetch['client_remaining'] ?> to the Home of education Consultants. </li>
-                                            <li>All payments shall be made in accordance with the payment schedule agreed upon by both parties.</li>
+                                        <ul  style="margin-top: -2% !important">
+                                            <li id="customIdForLi">The total cost of the work permit is agreed upon as <?php echo $WorkClientsFetch['client_amountfig'] ?> (<?php echo $WorkClientsFetch['client_amountwords'] ?>).</li>
+                                            <li id="customIdForLi"><b><?php echo $WorkClientsFetch['client_name'] ?></b> agrees to pay an initial amount of <?php echo $WorkClientsFetch['client_advance'] ?> as an advance payment before the work permit application process begins.</li>
+                                            <li id="customIdForLi">After the successful acquisition of the work permit, <b><?php echo $WorkClientsFetch['client_name'] ?></b> will pay the remaining amount of <?php echo $WorkClientsFetch['client_remaining'] ?> to the Home of education Consultants. </li>
+                                            <li id="customIdForLi">All payments shall be made in accordance with the payment schedule agreed upon by both parties.</li>
                                         </ul>
                                     </p>
 
-                                    <p style="margin: 0% !important">
+                                    <?php
+                                    if ( $WorkClientsFetch['client_visit'] === '1') {
+                                    ?>
+
+                                    <p style="margin-top: -1% !important">
+                                        <b>Dubai Visa Expenses:</b>
+                                    </p>
+
+                                    <ul style="margin-top: -2%;">
+                                        <li id="customIdForLi">
+                                            After obtaining the work permit, <b>Mr. <?php echo $WorkClientsFetch['client_name'] ?></b> will be responsible for acquiring a visa to enter Dubai.
+                                        </li>
+
+                                        <li id="customIdForLi">
+                                            The expenses related to the Dubai visa, including but not limited to application fees, travel costs, and accommodation, shall be borne by <b>Mr. <?php echo $WorkClientsFetch['client_name'] ?></b>.
+                                        </li>
+                                    </ul>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <p style="margin-top: -1% !important">
                                         <b>Terms and Conditions:</b>
                                     </p>
 
@@ -103,38 +125,39 @@
                                     ?>
 
                                     <!-- <p> -->
-                                        <ul style="margin-top: -1;">
-                                            <li>
+                                        <ul style="margin-top: -2%;">
+                                            <li id="customIdForLi">
                                                 Home of Education Consultants will complete <b>Mr. <?php echo $WorkClientsFetch['client_name'] ?></b> Process in <?php echo $WorkClientsFetch['client_processtime'] ?> from today <?php echo $date ?> to embassy.
                                             </li>
 
-                                            <li>
+                                            <li id="customIdForLi">
                                                 <b><?php echo $WorkClientsFetch['client_name'] ?></b> understands that the work permit is valid for <?php echo $WorkClientsFetch['client_permitduration'] ?> and does not guarantee employment.
                                             </li>
 
-                                            <li>
+                                            <li id="customIdForLi">
                                                 The Client will provide reasonable assistance and guidance to <b><?php echo $WorkClientsFetch['client_name'] ?></b> during the work permit application process. 
                                             </li>
 
-                                            <li>
+                                            <li id="customIdForLi">
                                                 The Client shall not be held responsible for any delays or denials in the work permit issuance caused by factors beyond their control, including but not limited to government regulations or changes in immigration policies. 
                                             </li>
 
-                                            <li>
+                                            <li id="customIdForLi">
                                                 <b><?php echo $WorkClientsFetch['client_name'] ?></b> agrees to provide all necessary documents and information required for the work permit application process promptly.
                                             </li>
 
-                                            <li>
+                                            <li id="customIdForLi">
                                                 <b><?php echo $WorkClientsFetch['client_name'] ?></b> acknowledges that the work permit is non-transferable and is exclusively for his personal use.
                                             </li>
                                         </ul>
                                     <!-- </p> -->
-
+                                </div>
+                            </div>
                                     <!-- Data Table here -->
                                     <div class="row mt-5">
                                         <div class="col-6">
                                              <p>
-                                                <b><?php echo $WorkClientsFetch['client_name'] ?> S/O <b><?php echo $WorkClientsFetch['client_guardian'] ?></b></b>
+                                                <b><?php echo $WorkClientsFetch['client_name'] ?> S/O <?php echo $WorkClientsFetch['client_guardian'] ?></b>
                                             </p>  
                                             
                                             <p>
@@ -153,8 +176,7 @@
                                         </div>
                                     </div> <!-- end row -->
 
-                                </div>
-                            </div>
+                                
                             </form>
                     <!-- </div> -->
                 <!-- </div>  -->

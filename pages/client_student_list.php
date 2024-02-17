@@ -78,7 +78,7 @@
                                         <td>'.$rowClients['client_contact'].'</td>
                                         <td>'.$rowClients['country_name'].'</td>
                                         <td class="text-center"><a href="client_study_edit.php?id='.$rowClients['s_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
-                                        <td class="text-center"><a href="client_work_agreement.php?id='.$rowClients['s_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
+                                        <td class="text-center"><a href="client_study_agreement.php?id='.$rowClients['s_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
                                     </tr>
                                     ';
                                 }

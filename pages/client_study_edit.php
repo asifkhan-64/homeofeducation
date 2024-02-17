@@ -31,6 +31,7 @@
         $client_bankstatement   = $_POST['client_bankstatement'];
         $client_amountafter     = $_POST['client_amountafter'];
         $client_cnic            = $_POST['client_cnic'];
+        $client_advancewords            = $_POST['client_advancewords'];
         $id                     = $_POST['id'];
 
 
@@ -51,6 +52,7 @@
                          `client_bankstatement` = '$client_bankstatement',
                           `client_amountafter` = '$client_amountafter',
                            `u_id` = '$u_id'
+                            `client_advancewords` = '$client_advancewords'
                              WHERE s_id = '$id'");
 
         if (!$updateQuery) {
@@ -178,18 +180,25 @@
                                     <input class="form-control" placeholder="i.e Pound 15000" type="text" value="<?php echo $fetch_getQuery['client_advance'] ?>" id="example-text-input" name="client_advance" required="">
                                 </div>
 
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Refund Days (Refusal)</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Advance Fee (Words)</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" placeholder="i.e 20 Days in PKR" type="text" value="<?php echo $fetch_getQuery['client_refund'] ?>" id="example-text-input" name="client_refund" required="">
+                                    <input class="form-control" placeholder="i.e Fifteen Thousand Pounds" type="text" value="<?php echo $fetch_getQuery['client_advancewords'] ?>" id="example-text-input" name="client_advancewords" required="">
                                 </div>
                             </div>
 
                             <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Refund Days (Refusal)</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="i.e 20 Days in PKR" type="text" value="<?php echo $fetch_getQuery['client_refund'] ?>" id="example-text-input" name="client_refund" required="">
+                                </div>
+
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Bank Statement</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" placeholder="Bank Statement" type="text" value="<?php echo $fetch_getQuery['client_bankstatement'] ?>" id="example-text-input" name="client_bankstatement" required="">
                                 </div>
+                            </div>
 
+                            <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Amount After Visa</label>
                                 <div class="col-sm-4">
                                     <input class="form-control" placeholder="i.e 1000 Pounds" type="text" value="<?php echo $fetch_getQuery['client_amountafter'] ?>" id="example-text-input" name="client_amountafter" required="">

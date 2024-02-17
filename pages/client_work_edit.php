@@ -32,6 +32,7 @@
         $client_processtime     = $_POST['client_processtime'];
         $client_workstatus      = $_POST['client_workstatus'];
         $client_cnic            = $_POST['client_cnic'];
+        $client_visit            = $_POST['client_visit'];
         $id                     = $_POST['id'];
 
 
@@ -50,7 +51,8 @@
                        `client_remaining` = '$client_remaining',
                         `client_processtime` = '$client_processtime',
                          `client_workstatus` = '$client_workstatus',
-                          `client_cnic` = '$client_cnic'
+                          `client_cnic` = '$client_cnic',
+                           `client_visit` = '$client_visit'
                             WHERE w_id = '$id'");
                             
         if (!$updateQuery) {
@@ -127,11 +129,7 @@
                                 <div class="col-sm-4">
                                     <input class="form-control cnic" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="<?php echo $fetch_getQuery['client_cnic'] ?>" id="example-text-input" name="client_cnic" required="">
                                 </div>
-                            </div>
 
-                            <hr />
-
-                            <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Work Country</label>
                                 <div class="col-sm-4">
                                         <?php
@@ -148,6 +146,30 @@
                                                 $optCountries.= "</select>";
                                             echo $optCountries;
                                         ?>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Dubai Visit</label>
+                                <div class="col-sm-4">
+                                    <select required name="client_visit" class="form-control status">
+                                        <?php
+                                        if ($fetch_getQuery['client_visit'] === '1') {
+                                            echo '
+                                                <option value="0">No</option>
+                                                <option value="1" selected>Yes</option>
+                                            ';
+                                        }else {
+                                            echo '
+                                                <option value="0" selected>No</option>
+                                                <option value="1">Yes</option>
+                                            ';
+                                        }
+                                        ?>
+                                        
+                                    </select>
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Permit Duration</label>

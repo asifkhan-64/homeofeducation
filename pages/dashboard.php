@@ -6,9 +6,21 @@
     }
     include('../_partials/header.php');
 
-    // $countedInst = mysqli_query($connect, "SELECT COUNT(*) AS countedIns FROM `institutes`");
-    // $fetch_countedAllIns = mysqli_fetch_assoc($countedInst);
-    // $Ins = $fetch_countedAllIns['countedIns'];
+    $countedUser = mysqli_query($connect, "SELECT COUNT(*) AS countedUsers FROM `login_user`");
+    $fetch_countedAllUsers = mysqli_fetch_assoc($countedUser);
+    $Users = $fetch_countedAllUsers['countedUsers'];
+
+    $countedUserAdmin = mysqli_query($connect, "SELECT COUNT(*) AS countedUserAdmin FROM `login_user` WHERE user_role = '1'");
+    $fetch_countedAllAdmin = mysqli_fetch_assoc($countedUserAdmin);
+    $Admin = $fetch_countedAllAdmin['countedUserAdmin'];
+
+    $countedUserManagers = mysqli_query($connect, "SELECT COUNT(*) AS countedUserManagers FROM `login_user` WHERE user_role = '2'");
+    $fetch_countedAllManagers = mysqli_fetch_assoc($countedUserManagers);
+    $Managers = $fetch_countedAllManagers['countedUserManagers'];
+
+    $countedUserExpenses = mysqli_query($connect, "SELECT COUNT(*) AS countedUserExpenses FROM `login_user` WHERE user_role = '3'");
+    $fetch_countedAllExpenses = mysqli_fetch_assoc($countedUserExpenses);
+    $Expenses = $fetch_countedAllExpenses['countedUserExpenses'];
 
     // $countedWards = mysqli_query($connect, "SELECT COUNT(*) AS countedWards FROM `wards`");
     // $fetch_countedAllWards = mysqli_fetch_assoc($countedWards);
@@ -50,13 +62,13 @@
                         <div class="card mini-stat m-b-30" style="background-color:#DD4B39">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-school float-right mb-0"></i>
+                                    <i class="fa fa-users float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase mb-0">All Institutes</h6>
+                                <h6 class="text-uppercase mb-0">All Users</h6>
                             </div>
                             <div class="card-body">
                                 <div class="pb-4 text-center text-white">
-                                    <span style="font-size: 50px"><?php echo $Ins ?></span>
+                                    <span style="font-size: 50px"><?php echo $Users ?></span>
                                 </div>
                             </div>
                         </div>
@@ -66,13 +78,13 @@
                         <div class="card mini-stat m-b-30" style="background-color: #00A65A">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-microscope float-right mb-0"></i>
+                                    <i class="fa fa-user float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase mb-0">Technologies</h6>
+                                <h6 class="text-uppercase mb-0">Admin</h6>
                             </div>
                             <div class="card-body">
                                 <div class="pb-4 text-center text-white">
-                                    <span style="  font-size: 50px"><?php echo $Tech ?></span>
+                                    <span style="  font-size: 50px"><?php echo $Admin ?></span>
                                 </div>
                             </div>
                         </div>
@@ -82,13 +94,13 @@
                         <div class="card mini-stat m-b-30" style="background-color:#00C0EF ">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-bed float-right mb-0"></i>
+                                    <i class="fa fa-user float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase mb-0">Wards</h6>
+                                <h6 class="text-uppercase mb-0">Front Desk</h6>
                             </div>
                             <div class="card-body">
                                 <div class="pb-4 text-center text-white">
-                                    <span style="font-size: 50px"><?php echo $Wards ?></span>
+                                    <span style="font-size: 50px"><?php echo $Managers ?></span>
                                 </div>
                             </div>
                         </div>
@@ -98,13 +110,13 @@
                         <div class="card mini-stat m-b-30" style="background-color: #F39C12">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-school float-right mb-0"></i>
+                                    <i class="fa fa-user float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase  mb-0">Students</h6>
+                                <h6 class="text-uppercase  mb-0"><Students>Expense Desk</Students></h6>
                             </div>
                             <div class="card-body">
                                 <div class="pb-4 text-center text-white">
-                                    <span style=" font-size: 50px"><?php echo $Std  ?></span>
+                                    <span style=" font-size: 50px"><?php echo $Expenses  ?></span>
                                 </div>
                             </div>
                         </div>

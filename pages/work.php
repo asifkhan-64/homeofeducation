@@ -28,6 +28,7 @@
         $client_processtime     = $_POST['client_processtime'];
         $client_workstatus      = $_POST['client_workstatus'];
         $client_cnic            = $_POST['client_cnic'];
+        $client_visit            = $_POST['client_visit'];
 
 
         $insertQuery = mysqli_query($connect, "INSERT INTO `work_client`(
@@ -46,7 +47,8 @@
                         `client_processtime`,
                          `client_workstatus`,
                           `u_id`,
-                           `client_cnic`
+                           `client_cnic`,
+                            `client_visit`
             ) VALUES (
                 '$client_name',
                  '$client_guardian',
@@ -63,7 +65,8 @@
                             '$client_processtime',
                              '$client_workstatus',
                               '$u_id',
-                               '$client_cnic'
+                               '$client_cnic',
+                                '$client_visit'
             )");
         if (!$insertQuery) {
             $error = 
@@ -138,16 +141,12 @@
                                 <div class="col-sm-4">
                                     <input class="form-control cnic" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="" id="example-text-input" name="client_cnic" required="">
                                 </div>
-                            </div>
 
-                            <hr />
-
-                            <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Work Country</label>
                                 <div class="col-sm-4">
                                         <?php
                                             $getCountries = mysqli_query($connect, "SELECT * FROM `countries`");
-                                            $optCountries = '<select required name="client_country" class="form-control comp">';
+                                            $optCountries = '<select required name="client_country" class="form-control visit">';
                                                 
                                                 while ($rowCountries = mysqli_fetch_assoc($getCountries)) {
                                                     $optCountries.= '<option value='.$rowCountries['c_id'].'>'.$rowCountries['country_name'].'</option>';
@@ -155,6 +154,18 @@
                                                 $optCountries.= "</select>";
                                             echo $optCountries;
                                         ?>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Dubai Visit</label>
+                                <div class="col-sm-4">
+                                    <select required name="client_visit" class="form-control status">
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
                                 </div>
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Permit Duration</label>
@@ -201,6 +212,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <hr />
 
                             <div class="form-group row">
@@ -258,25 +270,33 @@ $('.status').select2({
 });
 </script>
 
-<script>
-    // Get the input element and the display element
-    const textInput = document.getElementById('textInput');
-    const textDisplay = document.getElementById('textDisplay');
-    const textDisplaySecond = document.getElementById('textDisplaySecond');
-    const textDisplayThird = document.getElementById('textDisplayThird');
-    const textDisplayFourth = document.getElementById('textDisplayFourth');
+<script type="text/javascript">
+$('.visit').select2({
+  placeholder: 'Select an option',
+  allowClear:true
+  
+});
+</script>
 
-    // Add keyup event listener to the input element
-    textInput.addEventListener('keyup', function() {
-      // Get the text value from the input
-      const text = textInput.value;
-      // Update the text content of the display element
-      textDisplay.textContent = text;
-      textDisplaySecond.textContent = text;
-      textDisplayThird.textContent = text;
-      textDisplayFourth.textContent = text;
-    });
-  </script>
+    <script>
+        // Get the input element and the display element
+        const textInput = document.getElementById('textInput');
+        const textDisplay = document.getElementById('textDisplay');
+        const textDisplaySecond = document.getElementById('textDisplaySecond');
+        const textDisplayThird = document.getElementById('textDisplayThird');
+        const textDisplayFourth = document.getElementById('textDisplayFourth');
+
+        // Add keyup event listener to the input element
+        textInput.addEventListener('keyup', function() {
+        // Get the text value from the input
+        const text = textInput.value;
+        // Update the text content of the display element
+        textDisplay.textContent = text;
+        textDisplaySecond.textContent = text;
+        textDisplayThird.textContent = text;
+        textDisplayFourth.textContent = text;
+        });
+    </script>
 
 
     <script>
