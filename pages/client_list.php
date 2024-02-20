@@ -30,7 +30,7 @@
             </div>
 
             <div class="col-sm-2 my-4">
-                <a href="clients_std_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-success btn-lg">Study</a>
+                <a href="client_student_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-success btn-lg">Study</a>
             </div>
 
             <div class="col-sm-2 my-4">
@@ -56,16 +56,17 @@
                                     <th>Address</th>
                                     <th>Contact</th>
                                     <th>Country</th>
-                                    <th>Deal By</th>
+                                    <th class="text-center"> <i class="fa fa-edit"></i></th>
                                     <th class="text-center"> <i class="fa fa-print"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
 
-                                $retClients = mysqli_query($connect, "SELECT work_client.*, countries.country_name, login_user.name FROM `work_client`
+                                $retClients = mysqli_query($connect, "SELECT work_client.*, countries.country_name FROM `work_client`
                                 INNER JOIN countries ON countries.c_id = work_client.client_country
-                                INNER JOIN login_user ON login_user.id = work_client.u_id");
+                                WHERE work_client.u_id = '$signedUserId'");
+
                                 $iteration = 1;
 
                                 while ($rowClients = mysqli_fetch_assoc($retClients)) {
@@ -77,7 +78,7 @@
                                         <td>'.$rowClients['client_address'].'</td>
                                         <td>'.$rowClients['client_contact'].'</td>
                                         <td>'.$rowClients['country_name'].'</td>
-                                        <td>Mr. '.$rowClients['name'].'</td>
+                                        <td class="text-center"><a href="client_work_edit.php?id='.$rowClients['w_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
                                         <td class="text-center"><a href="client_work_agreement.php?id='.$rowClients['w_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
                                     </tr>
                                     ';

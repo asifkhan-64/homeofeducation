@@ -5,45 +5,81 @@
         header("LOCATION:../index.php");
     }
 
-    
-
     include('../_partials/header.php');
 ?>
+
+<style>
+    .customBtn {
+        transition-property: box-shadow, font-family, font-size;
+        transition-duration: 1s;
+    }
+    .customBtn:hover {
+        box-shadow: 3px 3px 3px 3px #ccc;
+        transition-duration: 0.5s;
+        font-size: 16px;
+    }
+    </style>
 
 <div class="page-content-wrapper ">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
-                <h5 class="page-title">Country</h5>
+            <div class="col-sm-3"></div>
+
+            <div class="col-sm-2 my-4">
+                <a href="client_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-secondary btn-lg">Work <i class="fa fa-eye"></i></a>
             </div>
+
+            <div class="col-sm-2 my-4">
+                <a href="clients_std_list.php" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-success btn-lg">Study</a>
+            </div>
+
+            <div class="col-sm-2 my-4">
+                <a href="#" style="width: 100% !important; padding: 15%;" class="customBtn btn btn-dark btn-lg">Visitors</a>
+                <!-- <a href="client_visit_list.php" disabled style="width: 100% !important; padding: 15%;" class="customBtn btn btn-dark btn-lg">Visitors</a> -->
+            </div>
+
+            <div class="col-sm-3"></div>
         </div>
         <!-- end row -->
-        <div class="row">
+<div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Country List</h4>
+                        <h4 class="mt-0 header-title">Clients List (Work Permit)</h4>
                        
                         <table id="datatable" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Country Name</th>
-                                    <th class="text-center"> <i class="fa fa-edit"></i>
-                                    </th>
+                                    <th>Name</th>
+                                    <th>Guardian</th>
+                                    <th>Address</th>
+                                    <th>Contact</th>
+                                    <th>Country</th>
+                                    <th>Deal By</th>
+                                    <!-- <th class="text-center"> <i class="fa fa-envelop"></i></th> -->
+                                    <th class="text-center"> <i class="fa fa-print"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $retWard = mysqli_query($connect, "SELECT * FROM countries");
+                                <?php
+
+                                $retClients = mysqli_query($connect, "SELECT work_client.*, countries.country_name, login_user.name FROM `work_client`
+                                INNER JOIN countries ON countries.c_id = work_client.client_country
+                                INNER JOIN login_user ON login_user.id = work_client.u_id");
                                 $iteration = 1;
 
-                                while ($rowWard = mysqli_fetch_assoc($retWard)) {
+                                while ($rowClients = mysqli_fetch_assoc($retClients)) {
                                     echo '
                                     <tr>
                                         <td>'.$iteration++.'</td>
-                                        <td>'.$rowWard['country_name'].'</td>
-                                        <td class="text-center"><a href="country_edit.php?id='.$rowWard['c_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
+                                        <td>'.$rowClients['client_name'].'</td>
+                                        <td>'.$rowClients['client_guardian'].'</td>
+                                        <td>'.$rowClients['client_address'].'</td>
+                                        <td>'.$rowClients['client_contact'].'</td>
+                                        <td>'.$rowClients['country_name'].'</td>
+                                        <td>Mr. '.$rowClients['name'].'</td>
+                                        <td class="text-center"><a href="client_work_agreement.php?id='.$rowClients['w_id'].'" type="button" class="btn text-white btn-success waves-effect waves-light">Agreement</a></td>
                                     </tr>
                                     ';
                                 }
