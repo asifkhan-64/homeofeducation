@@ -28,7 +28,10 @@
         $client_processtime     = $_POST['client_processtime'];
         $client_workstatus      = $_POST['client_workstatus'];
         $client_cnic            = $_POST['client_cnic'];
-        $client_visit            = $_POST['client_visit'];
+        $client_visit           = $_POST['client_visit'];
+        $witness_name           = $_POST['witness_name'];
+        $witness_fname          = $_POST['witness_fname'];
+        $witness_cnic           = $_POST['witness_cnic'];
 
 
         $insertQuery = mysqli_query($connect, "INSERT INTO `work_client`(
@@ -48,7 +51,10 @@
                          `client_workstatus`,
                           `u_id`,
                            `client_cnic`,
-                            `client_visit`
+                            `client_visit`,
+                             `witness_name`,
+                              `witness_fname`,
+                                `witness_cnic`
             ) VALUES (
                 '$client_name',
                  '$client_guardian',
@@ -66,7 +72,10 @@
                              '$client_workstatus',
                               '$u_id',
                                '$client_cnic',
-                                '$client_visit'
+                                '$client_visit',
+                                '$witness_name',
+                                 '$witness_fname',
+                                  '$witness_cnic'
             )");
         if (!$insertQuery) {
             $error = 
@@ -146,7 +155,7 @@
                                 <div class="col-sm-4">
                                         <?php
                                             $getCountries = mysqli_query($connect, "SELECT * FROM `countries`");
-                                            $optCountries = '<select required name="client_country" class="form-control visit">';
+                                            $optCountries = '<select required name="client_country" class="form-control visit" required="">';
                                                 
                                                 while ($rowCountries = mysqli_fetch_assoc($getCountries)) {
                                                     $optCountries.= '<option value='.$rowCountries['c_id'].'>'.$rowCountries['country_name'].'</option>';
@@ -162,7 +171,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Dubai Visit</label>
                                 <div class="col-sm-4">
-                                    <select required name="client_visit" class="form-control status">
+                                    <select required name="client_visit" class="form-control status" required="">
                                         <option value="0">No</option>
                                         <option value="1">Yes</option>
                                     </select>
@@ -206,10 +215,31 @@
 
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Work Status</label>
                                 <div class="col-sm-4">
-                                    <select required name="client_workstatus" class="form-control status" id="selectField">
+                                    <select required name="client_workstatus" class="form-control status" id="selectField" required="">
                                         <option value="0">Without Work</option>
                                         <option value="1">With Work</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Witness Name" type="text" value="" id="example-text-input" name="witness_name" required="">
+                                </div>
+
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness F/Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Witness Name" type="text" value="" id="example-text-input" name="witness_fname" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness CNIC No</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control cnic_witness" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="" id="example-text-input" name="witness_cnic" required="">
                                 </div>
                             </div>
 

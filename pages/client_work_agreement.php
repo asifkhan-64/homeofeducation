@@ -46,12 +46,12 @@
         </div>
         <!-- end row -->
         <div class="row" id="printElement">
-            <div class="col-12">
+            <div class="col-12 px-5">
                 <!-- <div class="card m-b-30" > -->
                     <!-- <div class="card-body" > -->
                         <form method="POST">
                             <div class="row">
-                                <div class="col-12" style="margin-top: 22%;">
+                                <div class="col-12" style="margin-top: 24%;">
                                     <div class="invoice-title">
                                         <h6 style="font-size: 90%;" class="m-t-0 text-center">
                                             Agreement (PAK <img src="../assets/flight.png" width="3%"> <?php echo $WorkClientsFetch['country_name'] ?>)
@@ -153,14 +153,15 @@
                                     <!-- </p> -->
                                 </div>
                             </div>
+
                                     <!-- Data Table here -->
-                                    <div class="row mt-5">
-                                        <div class="col-6">
-                                             <p>
+                                    <div class="row mt-4">
+                                        <div class="col-7">
+                                            <p style="font-size: 11px !important;">
                                                 <b><?php echo $WorkClientsFetch['client_name'] ?> S/O <?php echo $WorkClientsFetch['client_guardian'] ?></b>
                                             </p>  
                                             
-                                            <p>
+                                            <p style="font-size: 11px !important;">
                                                 <b>
                                                     CNIC No: <?php echo $WorkClientsFetch['client_cnic'] ?>
                                                 </b>
@@ -169,13 +170,31 @@
                                             </p>
                                         </div>
                                         
-                                        <div class="col-6 text-right">
+                                        <div class="col-5 ">
+                                            <p style="font-size: 11px !important;">
+                                                <b>Witness: <?php echo $WorkClientsFetch['witness_name'] ?> S/O <?php echo $WorkClientsFetch['witness_fname'] ?></b>
+                                            </p>  
+                                            
+                                            <p style="font-size: 11px !important;">
+                                                <b>
+                                                    CNIC No: <?php echo $WorkClientsFetch['client_cnic'] ?>
+                                                </b>
+
+                                                <span style="padding-left: 15%;"><b>Signature</b></span>
+                                            </p>
+                                        </div>
+                                    </div> <!-- end row -->
+
+                                    <!-- Data Table here -->
+                                    <div class="row" style="margin-top: 5%">
+                                        <div class="col-7"></div>
+                                        
+                                        <div class="col-5">
                                              <p><b>
                                                 HOME OF EDUCATION CONSULTANTS (PVT.LTD)
                                             </b></p>
                                         </div>
                                     </div> <!-- end row -->
-
                                 
                             </form>
                     <!-- </div> -->

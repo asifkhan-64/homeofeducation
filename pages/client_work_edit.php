@@ -32,7 +32,11 @@
         $client_processtime     = $_POST['client_processtime'];
         $client_workstatus      = $_POST['client_workstatus'];
         $client_cnic            = $_POST['client_cnic'];
-        $client_visit            = $_POST['client_visit'];
+        $client_visit           = $_POST['client_visit'];
+
+        $witness_name           = $_POST['witness_name'];
+        $witness_fname          = $_POST['witness_fname'];
+        $witness_cnic           = $_POST['witness_cnic'];
         $id                     = $_POST['id'];
 
 
@@ -52,8 +56,11 @@
                         `client_processtime` = '$client_processtime',
                          `client_workstatus` = '$client_workstatus',
                           `client_cnic` = '$client_cnic',
-                           `client_visit` = '$client_visit'
-                            WHERE w_id = '$id'");
+                           `client_visit` = '$client_visit',
+                            `witness_name` = '$witness_name',
+                             `witness_fname` = '$witness_fname',
+                              `witness_cnic` = '$witness_cnic'
+                                WHERE w_id = '$id'");
                             
         if (!$updateQuery) {
             $error = 
@@ -228,6 +235,28 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <hr />
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Witness Name" type="text" value="<?php echo $fetch_getQuery['witness_name'] ?>" id="example-text-input" name="witness_name" required="">
+                                </div>
+
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness F/Name</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Witness Name" type="text" value="<?php echo $fetch_getQuery['witness_fname'] ?>" id="example-text-input" name="witness_fname" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Witness CNIC No</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control cnic_witness" data-inputmask="'mask': '99999-9999999-9'"  placeholder="xxxxx-xxxxxxx-x" type="text" value="<?php echo $fetch_getQuery['witness_cnic'] ?>" id="example-text-input" name="witness_cnic" required="">
+                                </div>
+                            </div>
+
                             <hr />
                             <div class="form-group row">
                                 <!-- <label for="example-password-input" class="col-sm-2 col-form-label"></label> -->
